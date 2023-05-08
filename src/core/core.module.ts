@@ -22,6 +22,7 @@ import { TypeOrmModule } from "@nestjs/typeorm"
         username: configService.get<string>(`pgdb.username`),
         password: configService.get<string>(`pgdb.password`),
         autoLoadEntities: true,
+        synchronize: true, // se recomienda tener este valor en true sólo para modo desarrollo
       }),
       inject: [ConfigService],
     }),
