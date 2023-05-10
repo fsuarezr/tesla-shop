@@ -28,7 +28,7 @@ export class CreateProductDto {
 
   @IsString()
   @IsOptional()
-  description?: number
+  description?: string
 
   @IsString()
   @IsOptional()
