@@ -102,6 +102,10 @@ export class ProductsService {
         product.images = images.map((image) =>
           this.productImageRepository.create({ url: image }),
         )
+      } else {
+        product.images = await this.productImageRepository.findBy({
+          product: { id },
+        })
       }
 
       await queryRunner.manager.save(product)
@@ -110,7 +114,7 @@ export class ProductsService {
 
       await queryRunner.release()
 
-      return
+      return { ...product, images: product.images.map((img) => img.url) }
     } catch (error) {
       await queryRunner.rollbackTransaction()
       await queryRunner.release()
@@ -128,6 +132,16 @@ export class ProductsService {
       )
 
     return { message: `Product with id ${id} was succesfully deleted` }
+  }
+
+  async deleteAllProducts() {
+    const query = this.productImageRepository.createQueryBuilder(`product`)
+
+    try {
+      return await query.delete().where({}).execute()
+    } catch (error) {
+      this.handleDBExceptions(error)
+    }
   }
 
   private handleDBExceptions(error: any) {
