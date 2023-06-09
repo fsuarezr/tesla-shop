@@ -1,10 +1,11 @@
 import { NestFactory } from "@nestjs/core"
-import { AppModule } from "./app.module"
 import { ConfigService } from "@nestjs/config"
-import { ValidationPipe } from "@nestjs/common"
+import { Logger, ValidationPipe } from "@nestjs/common"
+import { AppModule } from "./app.module"
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+  const logger = new Logger(`main`)
 
   // Obteniendo variables de entorno
   const configService = app.get(ConfigService)
@@ -25,6 +26,6 @@ async function bootstrap() {
   )
 
   await app.listen(port)
-  console.log(`App running on port: ${port}`)
+  logger.log(`App running on port: ${port}`)
 }
 bootstrap()
