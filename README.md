@@ -12,17 +12,17 @@ npm i
 ```
 npm i -g @nest/cli
 ```
-4. Levantar la base de datos
+4. Clonar el archivo __.env.template__ y renombrar la copia a __.env__
+5. Llenar las variables de entorno definidas en __.env__
+6. Levantar la base de datos
 ```
 docker-compose -f docker-compose.yml up -d --build --force-recreate
 ```
-5. Clonar el archivo __.env.template__ y renombrar la copia a __.env__
-6. Llenar las variables de entorno definidas en __.env__
-7. Ejecutar SEED para cargar datos de prueba
-```
-http://localhost:4000/api/seed
-```
-8. Ejecutar la aplicación en modo desarrollo con:
+7. Ejecutar la aplicación en modo desarrollo con:
 ```
 npm run start:dev
+```
+8. Ejecutar SEED para cargar datos de prueba
+```
+http://localhost:4000/api/seed
 ```
