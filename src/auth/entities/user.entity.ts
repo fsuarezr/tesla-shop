@@ -8,6 +8,7 @@ export class User {
   @Column({
     type: `text`,
     unique: true,
+    select: false,
   })
   email: string
 
