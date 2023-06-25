@@ -4,7 +4,6 @@ import {
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
-  WsException,
 } from "@nestjs/websockets"
 import { MessagesWsService } from "./messages-ws.service"
 import { Server, Socket } from "socket.io"
