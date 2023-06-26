@@ -9,6 +9,11 @@ import { MulterModule } from "@nestjs/platform-express"
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: `postgres`,
+        ssl: configService.get(`pgdb.staging`) === `prod`,
+        extra:
+          configService.get(`pgdb.staging`) === `prod`
+            ? { rejectUnauthorized: false }
+            : null,
         host: configService.get<string>(`pgdb.host`),
         port: +configService.get<number>(`pgdb.port`),
         database: configService.get<string>(`pgdb.database`),
