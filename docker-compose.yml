@@ -1,8 +1,8 @@
-version: "3.7"
+version: "3.8"
 services:
   postgres:
     image: postgres:14
-    platform: linux/arm64
+    # platform: linux/arm64
     container_name: tesla-shop-database
     restart: always
     ports:
@@ -12,24 +12,24 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
     volumes:
-      - ../data/postgres:/var/lib/postgresql/data
+      - ./data/postgres:/var/lib/postgresql/data
     networks:
       - net-services
-  # tesla-shop:
-  #   depends_on: 
-  #     - postgres
-  #   build: ../TESLA-SHOP/.
-  #   container_name: tesla-shop-service
-  #   image: tesla/tesla-shop-service
-  #   restart: always
-  #   ports:
-  #     - 3000:3000
-  #   volumes:
-  #     - ../TESLA-SHOP:/usr/src/app
-  #     - //usr/src/app/node_modules
-  #     - //usr/src/app/.git
-  #   networks:
-  #     - net-services
+  tesla-shop:
+    # depends_on: 
+    #   - postgres
+    build: ../TESLA-SHOP/.
+    container_name: tesla-shop-service
+    image: tesla/tesla-shop-service
+    restart: always
+    ports:
+      - 4000:4000
+    volumes:
+      - ../TESLA-SHOP:/usr/src/app
+      - //usr/src/app/node_modules
+      - //usr/src/app/.git
+    networks:
+      - net-services
 
 # Docker Networks
 networks:
